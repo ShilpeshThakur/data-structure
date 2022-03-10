@@ -7,7 +7,8 @@
 	class LinkedList{
 	  public $head;
 	  
-	  public function __construct(){
+	  public function __construct()
+	  {
 	    $this->head = null;
 	  }
 	  
@@ -129,6 +130,39 @@
 	      }
 	    }
 	  }
+	  
+	  public function DeleteAllOccurringLinkedListElement($element)
+	  {
+	      if($this->head != null){
+	        $current = $this->head;
+	        $temp = $current;
+	        
+	        while($current != null && $current->data == $element)
+	        {
+	          $this->head = $current->next;
+  	        $current = $this->head;
+	        }
+	        
+	        $current = $this->head;
+	        
+  	      while($current != null)
+	        {
+	          
+  	        while( $current != null && $current->data != $element){
+  	          $temp = $current;
+  	          $current = $current->next;
+  	        }
+  	        if($current == null)
+	            break;
+	          $temp->next = $current->next;
+	          $current =  $temp->next;
+	        }
+	      }
+	      else{
+	        echo "LinkedList is empty.\n";
+	      }
+	  }
+	 
 	}
 	
 	$firstnode = new node();
@@ -169,5 +203,10 @@
 	//remove duplicate from LinkedList
 	$Mylist->removeduplicate();
 	$Mylist->PrintList();
-		
+	
+	$Mylist->push(10);
+	$Mylist->PrintList();
+	//delete all occurence of an element
+	$Mylist->DeleteAllOccurringLinkedListElement(10);
+	$Mylist->PrintList();
 ?>
